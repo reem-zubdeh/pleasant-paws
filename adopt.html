@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adopt a Pet</title>
+    <link rel="shortcut icon" href="images/logo.png" type="image/x-icon">
+    <link href="icons/css/fontawesome.min.css" rel="stylesheet">
+    <link href="icons/css/solid.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <nav class="navbar">
+        <a href="index.html" class="title">
+            <img src="images/logo.png" alt="Logo">
+            <span class="main-text">PleasantPaws</span>
+        </a>
+        <ul class="navlinks">
+            <li><a class="main-text" href="dogs.html"><i class="fas fa-dog"></i><span class="main-text"> Our Dogs</span></a></li>
+            <li><a class="main-text" href="cats.html"><i class="fas fa-cat"></i><span class="main-text"> Our Cats</span></a></li>
+            <li><a class="main-text" href="adopt.html"><i class="fas fa-heart"></i><span class="main-text"> Adopt a Pet</span></a></li>
+            <li><a class="main-text" href="contact_us.html"><i class="fas fa-comment-dots"></i><span class="main-text"> Contact Us</span></a></li>
+        </ul>
+    </nav>
+    
+    <h1 class="form-header main-text">Your new furry friend is excited to meet you!</h1>
+    <h3 class="form-header main-text">Please tell us a bit about yourself:</h2>
+
+    <form action="">
+        
+        <div class="form-item left-item">
+        <label for="first-name">First name: *</label>
+        <input type="text" name="first-name" id="first-name" placeholder="John" required>
+        </div>
+
+        <div class="form-item right-item">
+        <label for="last-name">Last name: *</label>
+        <input type="text" name="last-name" id="last-name" placeholder="Smith" required>
+        </div>
+
+        <div class="form-item full-item">
+        <label for="home">Home address: *</label>
+        <input type="text" name="home" id="home" placeholder="123 Main Street" required>
+        </div>
+
+        <div class="form-item left-item">
+        <label for="email">Email address: *</label>
+        <input type="email" name="email" id="email" placeholder="john@example.com" required>
+        </div>
+
+        <div class="form-item right-item">
+        <label for="phone">Phone number: *</label>
+        <input type="number" name="phone" id="phone" placeholder="555-5555" required>
+        </div>
+
+        <div class="form-item full-item">
+        <label for="pet">Please select the pet you would like to adopt: *</label> <br>
+        <select name="pet" id="pet" class="short-item" required>
+            <option value="dog1" disabled selected>Select</option>
+            <option value="dog1">Dog - Bruno</option>
+            <option value="dog2">Dog - Bella</option>
+            <option value="dog3">Dog - Apollo</option>
+            <option value="dog4">Dog - Coconut</option>
+            <option value="dog5">Dog - Teddy</option>
+            <option value="dog6">Dog - Lola</option>
+            <option value="dog7">Dog - Ginger</option>
+            <option value="dog8">Dog - Biscuit</option>
+            <option value="dog9">Dog - Buddy</option>
+            <option value="dog10">Dog - Poppy</option>
+            <option value="cat1">Cat - Ash</option>
+            <option value="cat2">Cat - Muffin</option>
+            <option value="cat3">Cat - Oscar</option>
+            <option value="cat4">Cat - Daisy</option>
+            <option value="cat5">Cat - Mufasa</option>
+            <option value="cat6">Cat - Button</option>
+            <option value="cat7">Cat - Banana</option>
+            <option value="cat8">Cat - Tutu</option>
+            <option value="cat9">Cat - Sasha</option>
+            <option value="cat10">Cat - Luigi</option>
+            <option value="cat11">Cat - Ollie</option>
+            <option value="cat12">Cat - Pumpkin</option>
+            <option value="cat13">Cat - Sprinkles</option>
+        </select>
+        </div>
+
+        <div class="form-item full-item">
+        <label for="date">Preferred appointment date: *</label> <br>
+        <input type="date" name="date" id="date" required class="short-item">
+        </div>
+
+        <div class="form-item full-item">
+        <label for="email">Additional details/comments:</label> <br>
+        <textarea type="email" name="email" id="email" placeholder="Enter text here..."></textarea>
+        </div>
+
+        <div class="form-item full-item">* required</div>
+
+        <div class="form-item full-item">
+        <button type="submit">Submit</button>
+        </div>
+
+    </form>
+
+    <div class="footer">
+        <span class="main-text">Copyright <small><i class="fas fa-copyright"></i></small> 2021</span>
+        <span class="main-text">
+            <small><i class="fas fa-phone"></i></small>&nbsp&nbsp 555-1234
+            <br>
+            <small><i class="fas fa-envelope"></i></small>&nbsp&nbsp pleasantpaws@example.com
+        </span>
+    </div>
+    
+</body>
+</html>
