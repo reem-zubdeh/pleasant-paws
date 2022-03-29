@@ -1,0 +1,564 @@
+@font-face { 
+    font-family: 'Zen Kurenaido'; 
+    src: url('fonts/ZenKurenaido-Regular.ttf'); 
+}
+@font-face { 
+    font-family: 'Quicksand'; 
+    src: url('fonts/Quicksand-VariableFont_wght.ttf'); 
+}
+@font-face { 
+    font-family: 'Playfair Display'; 
+    src: url('fonts/PlayfairDisplay-VariableFont_wght.ttf'); 
+}
+body {
+    min-height: 100vh;
+    min-width: 100%;
+    position: relative;
+    margin: 0;
+    padding: 0 0 120px 0;
+    box-sizing: border-box;
+    background-color: #f7e4d7;
+    /* overflow-x: hidden;  */
+    /* the width of the vertical scrollbar counts as part of the viewport, so a horizontal scrollbar is created to account for that small space under the vertical scrollbar. overflow-x:hidden removes the horizontal scrollbar*/
+}
+
+.navbar {
+    width: 100%;
+    height: 60px;
+    padding: 0 80px;
+    box-sizing: border-box;
+    background-image: linear-gradient(to bottom right, #eecbb4, #f1a36f);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 2;
+}
+
+.navbar a{
+    text-decoration: none;
+    font-family: 'Quicksand';
+}
+
+.title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.title img {
+    user-select: none;
+    width: 40px;
+    margin: 0px 20px;
+}
+
+.navlinks {
+    list-style: none;
+    padding: 0; /* browser automatically adds a bit of padding to ul */
+}
+
+.navlinks li {
+    display: inline;
+    margin: 0px 10px;
+}
+
+.navlinks a:hover {
+    color: #f5deb3;
+    text-shadow: 0 0 15px brown;
+    transition-duration: 300ms;
+}
+
+.main-banner {
+    overflow-x: hidden;
+    position: relative;
+}
+
+.main-banner h1 {
+    user-select: none;
+    position: absolute;
+    bottom: 5%;
+    right: 5%;
+    text-align: right;
+    font-size: 3em;
+    font-family: 'Playfair Display';
+    color: #f6eee0;
+}
+
+video {
+    pointer-events: none;
+    width: 100%;
+    height: 60vh;
+    object-fit: cover;
+    opacity: 0.8;
+}
+
+.footer span {
+    margin: 20px;
+}
+
+.main-text {
+    color: #7c341e;
+}
+
+.main-text::selection {
+    color: #f3b8a1;
+    background-color: #7c341e;
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 60vw;
+    margin: auto;
+}
+
+.main-content video {
+    height: 40vh;
+}
+
+.content p {
+    margin-bottom: 2em;
+    font-size: 1.2em;
+    font-family: 'Zen Kurenaido';
+    font-weight: 600;
+    letter-spacing: 0.1em;
+}
+
+.content i {
+    font-size: 10em;
+    margin: 40px 0 20px;
+    color: #f3b8a1;
+}
+
+.get-started {
+    display: block;
+    width: fit-content;
+    margin: auto;
+    padding: 15px;
+    box-sizing: border-box;
+    background-color: #f3b8a1;
+    color:#7c341e;
+    border: 4px solid white;
+    border-radius: 20px;
+    text-decoration: none;
+    text-align: center;
+    font-size: 1.3em;
+    font-family: 'Quicksand';
+}
+.get-started:hover{
+    background-color: #dda696;
+    animation-name: get-started-hover;
+    animation-duration: 300ms;
+    animation-fill-mode: forwards;
+}
+
+@keyframes get-started-hover {
+    to {
+        background-color: #f3cfc1;
+        transform: scale(1.1);
+        outline: 3px solid white;
+        outline-offset: 5px;
+    }
+}
+
+/* our cats/dogs  */
+
+.pet-grid {
+    margin: 10vh 5vw;
+    display: grid;
+    grid-template-columns: auto auto auto auto;
+    gap: 20px;
+}
+
+.pet {
+    position: relative;
+    box-sizing: border-box;
+    padding: 50px 20px;
+    border: 20px solid #ffffff88;
+    border-radius: 40px;
+    user-select: none;
+
+}
+
+.pet:hover{
+    animation-name: pet-hover;
+    animation-duration: 300ms;
+    animation-fill-mode: forwards;
+}
+
+@keyframes pet-hover {
+    to {
+        background-color: #ffffff83;
+        border:10px solid #ffffffb2;
+        transform: scale(1.06);
+    }
+}
+
+.pet-picture {
+    max-width: 400px;
+    width: 75%;
+    display: block;
+    margin: auto;
+    border: 5px solid #f3b8a1;
+    outline: 3px solid #f3b8a1;
+    outline-offset: 3px;
+    border-radius: 300px;
+}
+
+.pet-name {
+    text-align: center;
+    font-size: 1.1em;
+    font-family: 'Zen Kurenaido';
+    color: #7c341e;
+    letter-spacing: 0.4em;
+}
+
+.pet-description {
+    list-style: none;
+}
+
+.pet-description li {
+    font-family: 'Zen Kurenaido';
+    color: #7c341e;
+    letter-spacing: 0.1em;
+}
+
+.pet-description i {
+    margin-left: -2em;
+    padding-right: 0.5em;
+    font-size: 0.7em;
+}
+
+.pet-delete {
+    font-size: 2.5em;
+    position: absolute;
+    right: 0.5em;
+    top: 0.5em;
+    color: #f3b8a1;
+    transition-duration: 200ms;
+}
+
+.pet-delete:hover{
+    transform: scale(1.1);
+    color: #e78d69;
+    transition-duration: 200ms;
+}
+
+hr {
+    margin-top: 30px;
+    width: 80vw;
+    border: 1px solid #7c341e;
+    background: #7c341e;
+}
+
+.content .info {
+    width: 35em;
+    display: flex;
+    justify-content: space-between;
+}
+
+.content .info p {
+    max-width: 18em;
+    font-family: 'Quicksand';
+    font-size: 1.35em;
+    font-weight: 500;
+    color: #7c341e;
+}
+
+.content .info p.right {
+    text-align: right;
+}
+
+form {
+    width: 55vw;
+    margin: 5vh auto 10vh;
+    font-size: 1.3em;
+    font-family: 'Quicksand';
+    display: grid;
+    gap: 20px;
+    grid-template-columns: 1fr 1fr;
+}
+
+h1.pretty-header {
+    width: 80vw;
+    margin: 8vh 5vw 0;
+    font-family: 'Playfair Display';
+}
+
+h1.pretty-header a {
+    font-size: 0.7em;
+    font-weight: 900;
+    font-family: 'Zen Kurenaido';
+    text-decoration: none;
+    color: #e78d69;
+    user-select: none;
+}
+
+h2.pretty-header  {
+    font-size: 1.6em;
+    width: 80vw;
+    margin: 4vh 5vw;
+    font-family: 'Zen Kurenaido';
+}
+
+h3.pretty-header  {
+    font-size: 1.5em;
+    width:fit-content;
+    margin: 8vh auto;
+    font-family: 'Zen Kurenaido';
+}
+
+.left-item {
+    grid-column: 1 / span 1;
+}
+
+.right-item {
+    grid-column: 2 / span 1;
+}
+
+.full-item {
+    grid-column: 1 / span 2;
+}
+
+.form-item * {
+    width: 100%;
+}
+
+.form-item :not(label) {
+    box-sizing: border-box;
+    border-radius: 7px;
+    border: 3px solid #7c341e40;
+    padding: 15px;
+    margin: 10px 0;
+}
+
+.short-item{
+    width: 20em;
+}
+
+.form-item textarea {
+    height: 12em;
+    font-family: 'Quicksand';
+    resize: none;
+}
+
+.form-item button {
+    width: 80px;
+    display: block;
+    margin: auto;
+    color: #7c341e;
+    background-color: #ffffffb3;
+    transition: background-color 300ms;
+
+}
+.form-item button:hover {
+    background-color: #dadadab3;
+    transition: background-color 300ms;
+}
+
+.error {
+    color: #ff3838;
+    text-shadow: 0 0 6px #ff8383;
+}
+
+/* footer  */
+
+.footer {
+    font-family: 'Quicksand';
+    background-color: #f1a36f8c;
+    margin: 0;
+    padding: 20px 40px;
+    width: 100%;
+    height: 10vh;
+    box-sizing: border-box;
+    position: absolute;
+    bottom: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.footer span {
+    margin: 20px;
+}
+
+/* extra large */
+@media (min-width: 1200px) {
+    /* default; no changes */
+}
+
+/* large */
+@media (max-width: 1200px) {
+    .navbar {
+        padding: 5px 60px;
+    }
+    .main-banner h1 {
+        font-size: 2.8em;
+    }
+    video {
+        height: 60vh;
+    }
+    .main-content video {
+        height: 45vh;
+    }
+    .content i {
+        font-size: 8em;
+    }
+    .content {
+        width: 65vw;
+        font-size: 0.9em;
+    }
+    .pet-grid {
+        grid-template-columns: auto auto auto;
+    }
+}
+
+/* medium */
+@media (max-width: 992px) {
+    .navbar {
+        padding: 5px 40px;
+    }
+    .main-banner h1 {
+        font-size: 2.7em;
+    }
+    video {
+        height: 55vh;
+    }
+    .main-content video {
+        height: 35vh;
+    }
+    .content i {
+        font-size: 6.5em;
+    }
+    .content {
+        width: 70vw;
+        font-size: 0.85em;
+    }
+    .pet-grid {
+        grid-template-columns: auto auto;
+    }
+    form {
+        gap: 10px;
+        font-size: 1.15em;
+    }
+}
+
+/* small */
+@media (max-width: 768px) {
+    .title span {
+        font-size: 1.7em;
+    }
+    .navbar {
+        padding: 5px 70px;
+        height: 75px;
+    }
+    .navlinks span {
+        display: none;
+    }
+    .navlinks i {
+        font-size: 1.7em;
+    }
+    .main-banner h1 {
+        font-size: 2.5em;
+    }
+    video {
+        height: 50vh;
+    }
+    .main-content video {
+        height: 30vh;
+    }
+    .content i {
+        font-size: 6em;
+    }
+    .content {
+        width: 75vw;
+        font-size: 0.8em;
+    }
+    .pet-grid {
+        grid-template-columns: auto;
+        margin: 10vh 10vh;
+    }
+    .pet-picture {
+        width: 60%;
+    }
+    .pet-name {
+        font-size: 1.8em;
+    }
+    .pet-description {
+        font-size: 1.6em;
+    }
+
+    @keyframes pet-hover {
+        to {
+            background-color: #ffffff83;
+            border:10px solid #ffffffb2;
+            transform: scale(1.04);
+        }
+    }
+
+    body {
+        padding: 0 0 160px 0;
+    }
+    .left-item {
+        grid-column: 1 / span 2;
+    }
+    .right-item {
+        grid-column: 1 / span 2;
+    }
+
+    .footer {
+        padding: 40px 15px;
+        height: 20vh;
+        flex-direction: column-reverse;
+        justify-content: center;
+    }
+    .footer span {
+        margin: 10px;
+        font-size: 1.2em;
+        text-align: center;
+    }
+}
+
+/* extra small */
+@media (max-width: 600px) {
+    .title {
+        width: 60px;
+    }
+    .title span {
+        display: none;
+    }
+    .navbar {
+        padding: 5px 15px;
+    }
+    .navlinks i {
+        font-size: 1.7em;
+    }
+    .content i {
+        font-size: 5em;
+    }
+    .content {
+        width: 80vw;
+        font-size: 0.7em;
+    }
+    .pet-name {
+        font-size: 1.5em;
+    }
+    .pet-description {
+        font-size: 1.3em;
+    }
+    form {
+        font-size: 1.05em;
+    }
+    
+
+    @keyframes pet-hover {
+        to {
+            background-color: #ffffff83;
+            border:10px solid #ffffffb2;
+            transform: scale(1.02);
+        }
+    }
+
+}

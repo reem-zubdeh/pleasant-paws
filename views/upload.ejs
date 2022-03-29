@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload a pet to PleasantPaws</title>
+    <link rel="shortcut icon" href="images/logo.png" type="image/x-icon">
+    <link href="icons/css/fontawesome.min.css" rel="stylesheet">
+    <link href="icons/css/solid.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <nav class="navbar">
+        <a href="/" class="title">
+            <img src="images/logo.png" alt="Logo">
+            <span class="main-text">PleasantPaws</span>
+        </a>
+        <ul class="navlinks">
+            <li><a class="main-text" href="/dogs"><i class="fas fa-dog"></i><span class="main-text"> Our Dogs</span></a></li>
+            <li><a class="main-text" href="/cats"><i class="fas fa-cat"></i><span class="main-text"> Our Cats</span></a></li>
+            <li><a class="main-text" href="/profile"><i class="fas fa-user"></i><span class="main-text"> My profile</span></a></li>
+            <li><a class="main-text" href="/logout"><i class="fas fa-sign-out-alt"></i><span class="main-text"> Log out</span></a></li>
+        </ul>
+    </nav>
+    
+    <h1 class="pretty-header main-text">Put a pet up for adoption</h1>
+    <h2 class="pretty-header main-text">Whether you are giving up your own pet or just trying to house a homeless animal, we appreciate your efforts.</h2>
+    <h2 class="pretty-header main-text"><small class="main-text">This animal is one step closer to having a loving family. Tell us more about it.</small></h2>
+
+    <form action="/upload" method="POST" enctype="multipart/form-data">
+        
+        <div class="form-item left-item">
+        <label for="first-name">Species: *</label>
+        <select name="species" id="species">
+            <option value="Dog">Dog</option>
+            <option value="Cat">Cat</option>
+        </select>
+        </div>
+
+        <div class="form-item right-item">
+        <label for="name">Name: *</label>
+        <input type="text" name="name" id="name" placeholder="Max, Lily..." required>
+        </div>
+
+        <div class="form-item left-item">
+        <label for="age">Age: *</label>
+        <input type="text" name="age" id="age" placeholder="5 months" required>
+        </div>
+
+        <div class="form-item right-item">
+        <label for="gender">Gender: *</label>
+        <select name="gender" id="gender">
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+        </select>
+        </div>
+
+        <div class="form-item left-item">
+        <label for="breed">Breed: *</label>
+        <input type="text" name="breed" id="breed" placeholder="Border Terrier, Persian, Malamute/Husky Mix...">
+        </div>
+
+        <div class="form-item right-item">
+        <label for="image">Upload a picture: *</label>
+        <input type="file" name="image" id="image" accept="image/*">
+        </div>
+
+        <div class="form-item full-item">
+        <label for="likes">Likes:</label>
+        <input type="text" name="likes" id="likes" placeholder="snacks, cuddles">
+        </div>
+
+        <div class="form-item full-item">
+        <label for="dislikes">Dislikes:</label>
+        <input type="text" name="dislikes" id="dislikes" placeholder="strangers, loud noises">
+        </div>
+
+        <div class="form-item full-item">* required</div>
+
+        <div class="form-item full-item">
+        <button type="submit">Submit</button>
+        </div>
+
+    </form>
+
+    <div class="footer">
+        <span class="main-text">Copyright <small><i class="fas fa-copyright"></i></small> 2021</span>
+        <span class="main-text">
+            <small><i class="fas fa-phone"></i></small>&nbsp&nbsp 555-1234
+            <br>
+            <small><i class="fas fa-envelope"></i></small>&nbsp&nbsp pleasantpaws@example.com
+        </span>
+    </div>
+    
+</body>
+</html>

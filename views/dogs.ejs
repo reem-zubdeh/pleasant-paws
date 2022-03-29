@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Dogs</title>
+    <link rel="shortcut icon" href="images/logo.png" type="image/x-icon">
+    <link href="icons/css/fontawesome.min.css" rel="stylesheet">
+    <link href="icons/css/solid.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <nav class="navbar">
+        <a href="/" class="title">
+            <img src="images/logo.png" alt="Logo">
+            <span class="main-text">PleasantPaws</span>
+        </a>
+        <ul class="navlinks">
+            <li><a class="main-text" href="/dogs"><i class="fas fa-dog"></i><span class="main-text"> Our Dogs</span></a></li>
+            <li><a class="main-text" href="/cats"><i class="fas fa-cat"></i><span class="main-text"> Our Cats</span></a></li>
+            <% if (user) { %>
+                <li><a class="main-text" href="/profile"><i class="fas fa-user"></i><span class="main-text"> My profile</span></a></li>
+                <li><a class="main-text" href="/logout"><i class="fas fa-sign-out-alt"></i><span class="main-text"> Log out</span></a></li>
+            <% } else { %>
+                <li><a class="main-text" href="/signup"><i class="fas fa-plus"></i><span class="main-text"> Sign up</span></a></li>
+                <li><a class="main-text" href="/login"><i class="fas fa-sign-in-alt"></i><span class="main-text"> Log in</span></a></li>
+            <% }%>
+        </ul>
+    </nav>
+
+    
+    <% if (dogs.length == 0) { %>
+        
+        <div class="content">
+            <h3 class="pretty-header main-text">There are no dogs to display.</h3>
+        </div>
+
+    <% } else { %>
+
+        <div class="pet-grid">
+        
+            <% dogs.forEach(dog => { %>
+                <div class="pet">
+                    <img class="pet-picture" src="images/pets/<%= dog.image %> " alt="">
+                    <p class="pet-name"><%= dog.name %> </p>
+                    <ul class="pet-description">
+                        <li><i class="fas fa-paw"></i> <%= dog.gender %></li>
+                        <li><i class="fas fa-paw"></i> <%= dog.age %></li>
+                        <li><i class="fas fa-paw"></i> <%= dog.breed %></li>
+                        <% if (dog.likes) { %><li><i class="fas fa-paw"></i> Likes: <%= dog.likes %></li><% } %>
+                        <% if (dog.dislikes) { %><li><i class="fas fa-paw"></i> Dislikes: <%= dog.dislikes %></li><% } %>
+                        <li><i class="fas fa-paw"></i><a href="/user?q=<%= dog.owner %>">View owner information</a></li>
+                    </ul>
+                </div>
+            <% }) %>
+    
+        </div>
+
+    <% } %>
+
+    <div class="footer">
+        <span class="main-text">Copyright <small><i class="fas fa-copyright"></i></small> 2021</span>
+        <span class="main-text">
+            <small><i class="fas fa-phone"></i></small>&nbsp&nbsp 555-1234
+            <br>
+            <small><i class="fas fa-envelope"></i></small>&nbsp&nbsp pleasantpaws@example.com
+        </span>
+    </div>
+    
+</body>
+</html>

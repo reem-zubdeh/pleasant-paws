@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PleasantPaws Home</title>
+    <link rel="shortcut icon" href="images/logo.png" type="image/x-icon">
+    <link href="icons/css/fontawesome.min.css" rel="stylesheet">
+    <link href="icons/css/solid.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <nav class="navbar">
+        <a href="/" class="title">
+            <img src="images/logo.png" alt="Logo">
+            <span class="main-text">PleasantPaws</span>
+        </a>
+        <ul class="navlinks">
+            <li><a class="main-text" href="/dogs"><i class="fas fa-dog"></i><span class="main-text"> Our Dogs</span></a></li>
+            <li><a class="main-text" href="/cats"><i class="fas fa-cat"></i><span class="main-text"> Our Cats</span></a></li>
+            <% if (user) { %>
+                <li><a class="main-text" href="/profile"><i class="fas fa-user"></i><span class="main-text"> My profile</span></a></li>
+                <li><a class="main-text" href="/logout"><i class="fas fa-sign-out-alt"></i><span class="main-text"> Log out</span></a></li>
+            <% } else { %>
+                <li><a class="main-text" href="/signup"><i class="fas fa-plus"></i><span class="main-text"> Sign up</span></a></li>
+                <li><a class="main-text" href="/login"><i class="fas fa-sign-in-alt"></i><span class="main-text"> Log in</span></a></li>
+            <% }%>
+            
+        </ul>
+    </nav>
+
+    <div class="main-banner">
+        <video src="videos/bannervid1.mp4" autoplay loop muted></video>
+        <h1><small>Give them the home</small><br>they deserve.</h1>
+    </div>
+    
+    <div class="main-content">
+    
+        <div class="content">
+            <i class="fas fa-paw"></i>
+            <p class="main-text">Here at PleasantPaws, we believe that every animal should have a loving home and family. We try to make this a reality with our website, where future pet owners can find their perfect fluffy friend and take them home. We pride ourselves in connecting owners and past owners, striving to one day save every stray animal.</p>
+        </div>
+            
+        <video src="videos/bannervid2.mp4" autoplay loop muted></video>
+
+        <div class="content">
+            <i class="fas fa-home"></i>
+            <p class="main-text">Over 600 million dogs and cats all over the world suffer from homelessness. These dogs and cats have either been abandoned, or never had a home to begin with. This is why adoption is the perfect choice in case you are looking for a fluffy companion to care for: you would be rescuing that animal from an uncertain future, as well as adding an adorable member to the family. <br>
+            If you are looking to adopt, we encourage you to look through our collection of <a href="/dogs">dogs</a> or <a href="/cats">cats</a> to possibly get in touch with their current caregiver.</a></p>
+        </div>
+
+        <video src="videos/bannervid3.mp4" autoplay loop muted></video>
+        
+        <div class="content">
+            <i class="fas fa-heart"></i>
+            <p class="main-text"> If you are considering giving up your pet, or are struggling to find a home for a stray or fostered animal, we strongly encourage you to use our services. Create an account today, giving us some information about you and your pet, so that you can connect with one of the hundreds of families looking to adopt.</p>
+        </div>
+
+        <a class="get-started" href="/signup">Get Started</a>
+
+    </div>
+
+    <div class="footer">
+        <span class="main-text">Copyright <small><i class="fas fa-copyright"></i></small> 2021</span>
+        <span class="main-text">
+            <small><i class="fas fa-phone"></i></small>&nbsp&nbsp 555-1234
+            <br>
+            <small><i class="fas fa-envelope"></i></small>&nbsp&nbsp pleasantpaws@example.com
+        </span>
+    </div>
+    
+</body>
+</html>
