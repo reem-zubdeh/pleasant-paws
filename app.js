@@ -10,7 +10,7 @@ const fs = require('fs');
 
 require('dotenv').config();
 
-const connectionURL = "mongodb://localhost/PleasantPawsDB";
+const connectionURL = "mongodb://127.0.0.1/PleasantPawsDB";
 
 const app = express();
 
