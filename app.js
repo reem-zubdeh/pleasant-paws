@@ -34,34 +34,33 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(cookieParser());
 
+let db;
+
+MongoClient.connect(connectionURL, (err, database) => {
+    if (err) throw err;
+    db = database.db("PleasantPawsDB");
+    const server = app.listen(3000, () => {
+        console.log("server is running");
+    });
+});
+
+
 app.get('/', (req, res) => {
     res.render('index', {user: authenticate(req.cookies)});
 });
 
 app.get('/dogs', (req, res) => {
-    MongoClient.connect(connectionURL, (err, database) => {
+    db.collection("Pets").find({species: "Dog"}).toArray( (err, results) => {
         if (err) throw err;
-        const dbo = database.db("PleasantPawsDB");
-        dbo.collection("Pets").find({species: "Dog"}).toArray( (err, results) => {
-            database.close();
-            if (err) throw err;
-            res.render('dogs', { user: authenticate(req.cookies), dogs: results });
-        });
+        res.render('dogs', { user: authenticate(req.cookies), dogs: results });
     });
 });
 
 app.get('/cats', (req, res) => {
-
-    MongoClient.connect(connectionURL, (err, database) => {
+    db.collection("Pets").find({species: "Cat"}).toArray( (err, results) => {
         if (err) throw err;
-        const dbo = database.db("PleasantPawsDB");
-        dbo.collection("Pets").find({species: "Cat"}).toArray( (err, results) => {
-            database.close();
-            if (err) throw err;
-            res.render('cats', { user: authenticate(req.cookies), cats: results });
-        });
+        res.render('cats', { user: authenticate(req.cookies), cats: results });
     });
-    
 });
 
 app.get('/signup', (req, res) => {
@@ -80,27 +79,16 @@ app.get('/profile', (req, res) => {
     else {
 
         let name;
-        MongoClient.connect(connectionURL, (err, database) => {
+        db.collection("Users").findOne({email: user.name}, (err, result) => {
             if (err) throw err;
-            const dbo = database.db("PleasantPawsDB");
-            dbo.collection("Users").findOne({email: user.name}, (err, result) => {
-                database.close();
-                if (!result) {
-                    res.redirect('/logout');
-                    return;
-                }
-                name = result.firstname;
-
-                MongoClient.connect(connectionURL, (err, database) => {
-                    if (err) throw err;
-                    const dbo = database.db("PleasantPawsDB");
-                    dbo.collection("Pets").find({owner: user.name}).toArray((err, results) => {
-                        database.close();
-                        if (err) throw err;
-                        res.render('profile', {user, name, pets: results});
-                    });
-                });
-
+            if (!result) {
+                res.redirect('/logout');
+                return;
+            }
+            name = result.firstname;
+            db.collection("Pets").find({owner: user.name}).toArray((err, results) => {
+                if (err) throw err;
+                res.render('profile', {user, name, pets: results});
             });
         });
 
@@ -113,26 +101,21 @@ app.get('/user', (req, res) => {
         res.redirect('/');
     }
     else {
-        MongoClient.connect(connectionURL, (err, database) => {
+        db.collection("Users").findOne({email: target}, (err, result) => {
             if (err) throw err;
-            const dbo = database.db("PleasantPawsDB");
-            dbo.collection("Users").findOne({email: target}, (err, result) => {
-                database.close();
-                if (err) throw err;
-                if (!result) {
-                    res.redirect('/');
-                    return;
-                }
-                res.render('user', {
-                    user: authenticate(req.cookies),
-                    firstname : result.firstname,
-                    lastname: result.lastname,
-                    email: result.email,
-                    phone : result.phone,
-                    info : result.info ? result.info : ''
-                });
-
+            if (!result) {
+                res.redirect('/');
+                return;
+            }
+            res.render('user', {
+                user: authenticate(req.cookies),
+                firstname : result.firstname,
+                lastname: result.lastname,
+                email: result.email,
+                phone : result.phone,
+                info : result.info ? result.info : ''
             });
+
         });
     }
 });
@@ -148,25 +131,20 @@ app.get('/edit', (req, res) => {
     if (!user) res.redirect('/login');
     else {
 
-        MongoClient.connect(connectionURL, (err, database) => {
+        db.collection("Users").findOne({email: user.name}, (err, result) => {
             if (err) throw err;
-            const dbo = database.db("PleasantPawsDB");
-            dbo.collection("Users").findOne({email: user.name}, (err, result) => {
-                database.close();
-                if (err) throw err;
-                if (!result) {
-                    res.redirect('/logout');
-                    return;
-                }                
-                res.render('edit', {
-                    firstname : result.firstname,
-                    lastname: result.lastname,
-                    home : result.home,
-                    phone : result.phone,
-                    info : result.info
-                });
-
+            if (!result) {
+                res.redirect('/logout');
+                return;
+            }                
+            res.render('edit', {
+                firstname : result.firstname,
+                lastname: result.lastname,
+                home : result.home,
+                phone : result.phone,
+                info : result.info
             });
+
         });
 
     }
@@ -222,14 +200,9 @@ app.post('/signup', (req, res) => {
         user = {firstname, lastname, home, email, phone, password: passwordHash};
         if (info != "") user.info = info;
 
-        MongoClient.connect(connectionURL, (err, database) => {
+        db.collection("Users").insertOne(user, (err, result) => {
             if (err) throw err;
-            const dbo = database.db("PleasantPawsDB");
-            dbo.collection("Users").insertOne(user, (err, result) => {
-                if (err) throw err;
-                res.redirect('/');
-                database.close();
-            });
+            res.redirect('/');
         });
 
     });
@@ -240,31 +213,25 @@ app.post('/signup', (req, res) => {
 app.post('/login', (req, res) => {
 
     let email = req.body.email.trim();
-    MongoClient.connect(connectionURL, (err, database) => {
+    db.collection("Users").findOne({email}, (err, result) => {
         if (err) throw err;
-        const dbo = database.db("PleasantPawsDB");
-        dbo.collection("Users").findOne({email}, (err, result) => {
-            database.close();
-            if (err) throw err;
-            if (!result) {
+        if (!result) {
+            res.render('login', {incorrect : true});
+            return;
+        }
+        let password = result.password;
+        bcrypt.compare(req.body.password, password, (err, matches) => {
+            if (!matches) {
                 res.render('login', {incorrect : true});
                 return;
             }
-            let password = result.password;
-            bcrypt.compare(req.body.password, password, (err, matches) => {
-                if (!matches) {
-                    res.render('login', {incorrect : true});
-                    return;
-                }
-                //grant access!!
-                const user = {name: email};
-                const accessToken = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET);
-                res.cookie('authToken', accessToken, { maxAge: 30*24*60*60*1000 }); //expires in 30 days
-                res.redirect('/');
-            });
+            //grant access!!
+            const user = {name: email};
+            const accessToken = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET);
+            res.cookie('authToken', accessToken, { maxAge: 30*24*60*60*1000 }); //expires in 30 days
+            res.redirect('/');
         });
     });
-
 });
 
 app.get('/logout', (req, res) => {
@@ -317,14 +284,9 @@ app.post('/upload', (req, res) => {
             if (likes) pet.likes = likes;
             if (dislikes) pet.dislikes = dislikes;
 
-            MongoClient.connect(connectionURL, (err, database) => {
+            db.collection("Pets").insertOne(pet, (err, result) => {
                 if (err) throw err;
-                const dbo = database.db("PleasantPawsDB");
-                dbo.collection("Pets").insertOne(pet, (err, result) => {
-                    if (err) throw err;
-                    res.redirect('/');
-                    database.close();
-                });
+                res.redirect('/');
             });
 
         });
@@ -336,32 +298,24 @@ app.post('/edit', (req, res) => {
     let user = authenticate(req.cookies);
     if (!user) res.redirect('/login');
     else {
-        MongoClient.connect(connectionURL, (err, database) => {
-            
-            if (err) throw err;
-            
-            const dbo = database.db("PleasantPawsDB");
-            let firstname, lastname, home, phone, info;
-            firstname = req.body.firstname.trim();
-            lastname = req.body.lastname.trim();
-            home = req.body.home.trim();
-            phone = req.body.phone.trim();
-            info = req.body.info.trim();
+        let firstname, lastname, home, phone, info;
+        firstname = req.body.firstname.trim();
+        lastname = req.body.lastname.trim();
+        home = req.body.home.trim();
+        phone = req.body.phone.trim();
+        info = req.body.info.trim();
 
-            let update = { $set: {firstname, lastname, home, phone}};
-            if (info != "") update.$set.info = info;
-            else {
-                dbo.collection("Users").updateOne({email: user.name}, {$unset: {info: ""}}, (err, result) => {
-                    if (err) throw err;
-                });
-            }
-
-            dbo.collection("Users").updateOne({email: user.name}, update, (err, result) => {
+        let update = { $set: {firstname, lastname, home, phone}};
+        if (info != "") update.$set.info = info;
+        else {
+            db.collection("Users").updateOne({email: user.name}, {$unset: {info: ""}}, (err, result) => {
                 if (err) throw err;
-                res.redirect('/profile');
-                database.close();
             });
+        }
 
+        db.collection("Users").updateOne({email: user.name}, update, (err, result) => {
+            if (err) throw err;
+            res.redirect('/profile');
         });
     }
 });
@@ -371,30 +325,16 @@ app.post('/delete', (req, res) => {
     if (!user) res.redirect('/login');
     let idPet = req.body.id;
     
-    MongoClient.connect(connectionURL, (err, database) => {
+    db.collection("Pets").findOne({_id: ObjectId(idPet)}, (err, result) => {
         if (err) throw err;
-        const dbo = database.db("PleasantPawsDB");
-        dbo.collection("Pets").findOne({_id: ObjectId(idPet)}, (err, result) => {
+        let image = result.image;
+        fs.unlink('assets/images/pets/' + image, (err) => {
             if (err) throw err;
-            let image = result.image;
-            fs.unlink('assets/images/pets/' + image, (err) => {
-                if (err) throw err;
-            });
-            database.close();
         });
     });
 
-    MongoClient.connect(connectionURL, (err, database) => {
+    db.collection("Pets").deleteOne({_id: ObjectId(idPet)}, (err, obj) => {
         if (err) throw err;
-        const dbo = database.db("PleasantPawsDB");
-        dbo.collection("Pets").deleteOne({_id: ObjectId(idPet)}, (err, obj) => {
-            if (err) throw err;                
-            database.close();
-        });
     });
     
-});
-
-const server = app.listen(3000, () => {
-    console.log("server is running");
 });
