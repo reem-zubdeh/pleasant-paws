@@ -14,7 +14,7 @@ Ensure MongoDB is installed. The MongoDB .bson files have been exported with mon
 
 Using MongoDB Database Tools: in the root directory, restore the "PleasantPawsDB" database files locally with the mongorestore tool. 
 
-If in project root directory, and and mongorestore.exe is present or added to PATH, run this command:
+If in project root directory, and mongorestore.exe is present or added to PATH, run this command:
 
     mongorestore -d PleasantPawsDB db/PleasantPawsDB
 
